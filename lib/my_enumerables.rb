@@ -65,6 +65,43 @@ module Enumerable
       i += 1
     end
   end
+
+  def my_any?(pattern=nil, &block)
+    i = 0
+    if block_given? 
+      until i === self.length do
+        if yield self[i]
+          true
+          exit
+        else
+          i += 1
+        end
+      end
+      false
+      exit
+    end
+    unless pattern.nil?
+      until i === self.length do
+        case self[i]
+        in ^pattern
+          true
+          exit
+        else
+          i += 1
+        end
+      end
+      false
+      exit
+    end
+    until i === self.length do
+      if self[i]
+        true
+        exit
+      end
+      false
+      i += 1
+    end
+  end
 end
 
 

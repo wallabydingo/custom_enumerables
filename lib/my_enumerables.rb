@@ -140,6 +140,35 @@ module Enumerable
     end
   end
 
+  def my_count(pattern=nil, &block)
+    i = 0
+    count = 0
+    if block_given? 
+      until i === self.length do
+        if yield self[i]
+          count += 1
+        end
+        i += 1
+      end
+    end
+    unless pattern.nil?
+      until i === self.length do
+        case self[i]
+        in ^pattern
+        count += 1
+        end
+        i += 1
+      end
+    end
+    until i === self.length do
+      if self[i]
+        count += 1
+      end
+      i += 1
+    end
+    count
+  end
+
 end
 
 

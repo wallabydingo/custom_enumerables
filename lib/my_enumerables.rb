@@ -27,12 +27,46 @@ module Enumerable
     end
   end
 
-  def my_all?
-    # testing git
-
+  
+  def my_all?(pattern=nil, &block)
+    i = 0
+    if block_given? 
+      until i === self.length do
+        if yield self[i]
+          i += 1
+        else
+          false
+          exit
+        end
+      end
+      true
+      exit
+    end
+    unless pattern.nil?
+      until i === self.length do
+        case self[i]
+        in ^pattern
+          true
+          i += 1
+        else
+          false
+          exit
+        end
+      end
+      true
+      exit
+    end
+    until i === self.length do
+      if !self[i]
+        false
+        exit
+      end
+      true
+      i += 1
+    end
   end
-
 end
+
 
 # You will first have to define my_each
 # on the Array class. Methods defined in

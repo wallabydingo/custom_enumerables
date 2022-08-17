@@ -169,6 +169,20 @@ module Enumerable
     count
   end
 
+  def my_map
+    i = 0
+    arr_tmp = []
+    if block_given?
+      until i === self.length do
+        arr_tmp.push(yield self[i])
+        i += 1
+      end
+      arr_tmp
+    else
+      self
+    end
+  end
+
 end
 
 

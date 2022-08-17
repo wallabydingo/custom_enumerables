@@ -102,6 +102,44 @@ module Enumerable
       i += 1
     end
   end
+
+  def my_none?(pattern=nil, &block)
+    i = 0
+    if block_given? 
+      until i === self.length do
+        if yield self[i]
+          false
+          exit
+        else
+          i += 1
+        end
+      end
+      true
+      exit
+    end
+    unless pattern.nil?
+      until i === self.length do
+        case self[i]
+        in ^pattern
+          false
+          exit
+        else
+          i += 1
+        end
+      end
+      true
+      exit
+    end
+    until i === self.length do
+      if self[i]
+        false
+        exit
+      end
+      true
+      i += 1
+    end
+  end
+
 end
 
 
